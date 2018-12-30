@@ -1,0 +1,38 @@
+#!/bin/sh
+set -eu
+
+if [ $# -eq 1 ]; then
+    prefix="$1"
+else
+    prefix='/'
+fi
+
+case "$prefix" in
+    /)
+        name="$(hostname)"
+        ;;
+    /?*)
+        name="$(basename "$prefix")"
+        ;;
+    *)
+        printf 'Bad prefix "%s"\n' "$prefix" >&2
+        exit 1
+        ;;
+esac
+
+workdir="$(mktemp -d)"
+archive_basename="portage-files-$name-$(date +%F)"
+archive_name="$archive_basename.tgz"
+root="$workdir/$archive_basename"
+archive_destination="/tmp/$archive_name"
+
+rm -f "$archive_name"
+
+mkdir -p "$root/etc" "$root/var/lib"
+cp -a "$prefix/etc/portage" "$root/etc/"
+cp -a "$prefix/var/lib/portage" "$root/var/lib/"
+tar -czvf "$archive_destination"  -C "$workdir" -- "$archive_basename"
+
+rm -rf -- "$workdir"
+
+echo Archive made at "$archive_destination"

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -eu
+
+mkdir -p /root/kernel-configs
+backup-kernel-config /root/kernel-configs
+
+printf '>> Available kernels:\n'
+eselect kernel list
+read -p 'Which number to upgrade to? '
+eselect kernel set "$REPLY"
+cp "/root/kernel-configs/runtime-kernel-config-$(uname -r)" /usr/src/linux/.config
+cd /usr/src/linux
+make silentoldconfig
+nice make -j$(($(nproc)+1))
+make modules_prepare
+make modules_install
+make install
+emerge -av @module-rebuild
+new_version="$(readlink /usr/src/linux)"
+dracut "/boot/initramfs-${new_version#linux-}.img" "${new_version#linux-}"
+target="$(mktemp)"
+grub-mkconfig -o "$target"
+diff -u /boot/grub/grub.cfg "$target" | less
+read -p 'Install grub config? '
+case "$REPLY" in
+    [yY]|[Yy][Ee][sS])
+        cp "$target" /boot/grub/grub.cfg
+        ;;
+esac

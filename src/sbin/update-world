@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+emerge -av -uDUN @world
+emerge -av -c

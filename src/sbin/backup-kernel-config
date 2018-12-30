@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+linux_version=$(readlink /usr/src/linux)
+target0="$1/kernel-config-${linux_version#linux-}"
+printf 'Backing up /usr/src/linux/.config to %s ...\n' "$target0"
+cp '/usr/src/linux/.config' "$target0"
+target1="$1/runtime-kernel-config-$(uname -r)"
+printf 'Backing up runtime kernel config to %s ...\n' "$target1"
+zcat '/proc/config.gz' > "$target1"
