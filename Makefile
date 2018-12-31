@@ -1,4 +1,4 @@
-PREFIX:=/usr/local
+PREFIX ?= /usr/local
 
 install:
 	install -d ${DESTDIR}${PREFIX}/sbin
