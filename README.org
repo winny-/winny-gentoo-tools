@@ -3,6 +3,8 @@
   Some simple scripts to automate package manager tasks. Some of the
   more complicated scripts are relatively inflexible.
 
+  An ebuild exists on at [[https://github.com/winny-/winny-overlay][winny-/winny-overlay]].
+
 ** Scripts
 
   - [[file:src/sbin/backup-kernel-config][backup-kernel-config]] :: Copy kernel config from =/usr/src/= and
