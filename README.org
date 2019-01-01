@@ -5,13 +5,13 @@
 
 ** Scripts
 
-  - =[[file:src/sbin/backup-kernel-config][backup-kernel-config]]= :: Copy kernel config from =/usr/src/= and
+  - [[file:src/sbin/backup-kernel-config][backup-kernel-config]] :: Copy kernel config from =/usr/src/= and
        =/proc/config.gz= into a directory.
-  - =[[file:src/sbin/do-sync][do-sync]]= :: Convienence script to run =emerge --update= and
+  - [[file:src/sbin/do-sync][do-sync]] :: Convienence script to run =emerge --update= and
        =eix-update=.
-  - =[[file:src/sbin/update-kernel][update-kernel]]= :: Compile new kernel and install it.
-  - =[[file:src/sbin/update-world][update-world]]= :: Update (upgrade) world
-  - =[[file:src/sbin/copy-portage-config][copy-portage-config]]= :: Tar up =/etc/portage= and
+  - [[file:src/sbin/update-kernel][update-kernel]] :: Compile new kernel and install it.
+  - [[file:src/sbin/update-world][update-world]] :: Update (upgrade) world
+  - [[file:src/sbin/copy-portage-config][copy-portage-config]] :: Tar up =/etc/portage= and
        =/var/lib/portage= for configuration merging and backup.
 
 ** License
