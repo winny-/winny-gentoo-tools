@@ -1,4 +1,5 @@
 #!/bin/sh
 set -eu
 emerge -av -uDUN @world
+emerge -av @preserved-rebuild
 emerge -av -c
